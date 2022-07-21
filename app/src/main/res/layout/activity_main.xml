@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/bg_mani">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/logoClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_thin"
+            android:text="Whish App"
+            android:textAlignment="center"
+            android:textColor="#2D2D2D"
+            android:textSize="50sp">
+
+        </TextView>
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_Inputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingHorizontal="40dp"
+            >
+
+
+            <EditText
+                android:id="@+id/Name_login_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:singleLine="true"
+                android:textColorHint="#797878"
+                android:backgroundTint="#2D2D2D"
+                android:textColor="@color/black">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/Password_login_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:singleLine="true"
+                android:textColor="#2D2D2D"
+                android:inputType="textPassword"
+                android:textColorHint="#797878"
+                android:backgroundTint="#2D2D2D">
+
+            </EditText>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button"
+                android:text="ВОЙТИ"
+                android:textSize="15dp">
+
+            </androidx.appcompat.widget.AppCompatButton>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Зарегистрироваться"
+                android:textColor="#797878"
+                android:textAlignment="center"
+                android:layout_marginTop="8dp">
+
+            </TextView>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Refresh">
+
+            </Button>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/showTokens"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="showTokens">
+
+            </Button>
+
+        </LinearLayout>
+
+
+</RelativeLayout>

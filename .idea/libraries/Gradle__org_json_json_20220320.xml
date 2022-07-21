@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.json:json:20220320">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/gradle-7.3.3/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/gradle-7.3.3/caches/modules-2/files-2.1/org.json/json/20220320/9bfe6cec965e83d80a68bfc167b3c49efd4f19ff/json-20220320-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/gradle-7.3.3/caches/modules-2/files-2.1/org.json/json/20220320/914f9944826a81aefe4522fa73ddf397bc089cfd/json-20220320-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
