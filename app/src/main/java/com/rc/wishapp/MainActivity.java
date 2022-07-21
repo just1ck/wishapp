@@ -2,9 +2,12 @@ package com.rc.wishapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -47,6 +50,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
     public String errorCode;
     public String errMessage;
     JSONObject errObject = null;
+    public SharedPreferences sPref;
+    final String SAVED_TEXT = "saved_login";
+    final String SAVED_PASS = "saved_pass";
+    EditText Login_input;
+    EditText Pass_input;
+    final String acT = "access_token";
+    final String rfT = "refresh_token";
+    public String retutnTokenAccess;
+    public String retutnTokenRefresh;
+
 
 
     @Override
@@ -74,11 +88,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button logInButton = findViewById(R.id.login_button);
-        EditText Login_input = findViewById(R.id.Name_login_input);
-        EditText Pass_input = findViewById(R.id.Password_login_input);
+        Login_input = findViewById(R.id.Name_login_input);
+        Pass_input = findViewById(R.id.Password_login_input);
         Button refreshBtn = findViewById(R.id.refresh);
         Button showTokens = findViewById(R.id.showTokens);
         TextView logoClick = findViewById(R.id.logoClick);
+
+
+        myApp.loadText(MainActivity.this, Login_input, Pass_input, SAVED_TEXT, SAVED_PASS);
+        myApp.loadTokens(MainActivity.this, rfT, acT, retutnTokenRefresh, retutnTokenAccess);
+
 
         final Animation alpha = AnimationUtils.loadAnimation(this, R.anim.button_anim);
 
@@ -86,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout layout = findViewById(R.id.layout_Inputs);
 
 
-        Login_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
+        Login_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -97,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Pass_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -149,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 access_token = rfTokens.getAcessToken();
                 tokensClass.setTokens(access_token, refresh_token);
                System.out.println(tokensClass.access());
-                showToast("Новый токен: " + tokensClass.access());
+
+                showToast(myApp.getAccess(MainActivity.this, rfT, acT));
             }
         });
 
@@ -185,6 +204,11 @@ public class MainActivity extends AppCompatActivity {
 //                    System.out.println(tokens);
 //                    postAuthV2(Login_input.getText().toString(), Pass_input.getText().toString());
 
+                } else if(errMessage.equals("1001")){
+                    Login_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    Pass_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    showToast("Логин или пароль не верные");
+
                 }
 
             }
@@ -211,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,  URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                showToast("Вы авторизировались");
+                showToast("Вы авторизировались!");
                 tokens = response.toString();
 
 
@@ -221,10 +245,11 @@ public class MainActivity extends AppCompatActivity {
                     String RFtok = jsonObj.getString("refresh_token");
 //                    accessToken = ACtok;
 //                    refreshToken = RFtok;
-                    access_token = ACtok;
-                    refresh_token = RFtok;
-                    tokensClass.setTokens(access_token, refresh_token);
-                    rfTokens.setRefresh_token(refresh_token);
+//                    access_token = ACtok;
+//                    refresh_token = RFtok;
+//                    tokensClass.setTokens(access_token, refresh_token);
+//                    rfTokens.setRefresh_token(refresh_token);
+                    myApp.setTokens(ACtok, RFtok, getApplicationContext(), rfT, acT);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -241,10 +266,12 @@ public class MainActivity extends AppCompatActivity {
                             HttpHeaderParser.parseCharset(error.networkResponse.headers));
                     errorCode = jsonErrString;
                     errObject = new JSONObject(errorCode);
-                    String errs = errObject.getString("description");
-                    errMessage = errs;
-                    showToast(errMessage);
+                    int errs = errObject.getInt("code");
+//                    errMessage = errs;
                     System.out.println(jsonErrString);
+                    if (errs == 1001){
+                        showToast("Логин или пароль введены не верны!");
+                    }
                 } catch (UnsupportedEncodingException | JSONException e) {
                     e.printStackTrace();
                 }
@@ -309,10 +336,32 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
+
+
     public boolean isEmailValid(String email){
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myApp.saveText(MainActivity.this, SAVED_TEXT, SAVED_PASS, Login_input, Pass_input);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        myApp.saveText(MainActivity.this, SAVED_TEXT, SAVED_PASS, Login_input, Pass_input);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        myApp.saveText(MainActivity.this, SAVED_TEXT, SAVED_PASS, Login_input, Pass_input);
+    }
 }
 
 

@@ -1,7 +1,10 @@
 package com.rc.wishapp;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,18 +30,32 @@ import org.json.XMLTokener;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import static com.rc.wishapp.MainActivity.refreshToken;
 
-public class RefreshTokens {
+
+public class RefreshTokens<sPre> {
     private Tokens tokens = new Tokens();
     private String allObjects;
     public JSONObject jsonObj = null;
     public String access_token;
     public String refresh_token;
+    public SharedPreferences sPre;
+    final String acT = "access_token";
+    final String rfT = "refresh_token";
+    public String retutnTokenAccess;
+    public String retutnTokenRefresh;
+    Context context;
+
 
     public String oldrefreshToken;
 
-    public void setRefresh_token(String oldrefreshToken){
+    public void setRefresh_token(String ACtok, String oldrefreshToken){
         this.oldrefreshToken = oldrefreshToken;
+        context= context.getApplicationContext();
+    }
+
+    public void loadToks(){
+        myApp.loadTokens(context.getApplicationContext(), rfT, acT, retutnTokenRefresh, retutnTokenAccess);
     }
 
     public String getRefreshToken(){
@@ -58,12 +75,13 @@ public class RefreshTokens {
 
 
         try {
-            jsonBody.put("refresh_token", oldrefreshToken);
+            jsonBody.put("refresh_token", myApp.getRefresh(context.getApplicationContext(), rfT, acT));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         final String requestBody = jsonBody.toString();
+
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,  URL, new Response.Listener<String>() {
@@ -75,8 +93,10 @@ public class RefreshTokens {
                     jsonObj = new JSONObject(allObjects);
                     String ACtok = jsonObj.getString("access_token");
                     String RFtok = jsonObj.getString("refresh_token");
-                    access_token = ACtok;
-                    refresh_token = RFtok;
+//                    access_token = ACtok;
+//                    refresh_token = RFtok;
+                    myApp.setTokens(ACtok, RFtok, context.getApplicationContext(), rfT, acT);
+                    
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
