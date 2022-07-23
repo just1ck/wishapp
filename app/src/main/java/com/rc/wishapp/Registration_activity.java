@@ -27,6 +27,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,7 +74,7 @@ public class Registration_activity extends AppCompatActivity {
 
 
 
-        TextView back_auth = findViewById(R.id.back_auth);
+        LinearLayout back_auth = findViewById(R.id.back_auth);
         nameInput = findViewById(R.id.nameInput);
         mailInput = findViewById(R.id.mailInput);
         passInput = findViewById(R.id.passInput);

@@ -95,7 +95,11 @@ public class MainActivity extends AppCompatActivity {
         Button refreshBtn = findViewById(R.id.refresh);
         Button showTokens = findViewById(R.id.showTokens);
         TextView logoClick = findViewById(R.id.logoClick);
-        TextView regBtn = findViewById(R.id.reg_btn);
+        LinearLayout regBtn = findViewById(R.id.reg_btn);
+
+        if (ErrConnection.hasConnection(MainActivity.this) == false){
+            showToast("Нет соединения");
+        }
 
 
         myApp.loadText(MainActivity.this, Login_input, Pass_input, SAVED_TEXT, SAVED_PASS);

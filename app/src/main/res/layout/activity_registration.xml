@@ -99,17 +99,23 @@
 
         </androidx.appcompat.widget.AppCompatButton>
 
-        <TextView
+        <LinearLayout
             android:id="@+id/back_auth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:text="Авторизироваться"
-            android:textAlignment="center"
-            android:textColor="#797878"
-            >
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="Авторизироваться"
+                android:textAlignment="center"
+                android:textColor="#797878"
+                >
 
-        </TextView>
+            </TextView>
+
+        </LinearLayout>
 
 
     </LinearLayout>

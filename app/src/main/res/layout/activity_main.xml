@@ -91,16 +91,24 @@
 
         </androidx.appcompat.widget.AppCompatButton>
 
-        <TextView
+        <LinearLayout
             android:id="@+id/reg_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:text="Зарегистрироваться"
-            android:textAlignment="center"
-            android:textColor="#797878">
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="Зарегистрироваться"
+                android:textAlignment="center"
+                android:textColor="#797878">
 
-        </TextView>
+            </TextView>
+
+
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/refresh"
