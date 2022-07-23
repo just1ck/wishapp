@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Registration_activity"
     android:background="@drawable/bg_mani">
 
     <LinearLayout
@@ -28,9 +28,7 @@
 
     </LinearLayout>
 
-
     <LinearLayout
-        android:id="@+id/layout_Inputs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -39,51 +37,61 @@
         android:orientation="vertical"
         android:paddingHorizontal="40dp">
 
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2D2D2D"
+            android:hint="Имя"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#797878">
+        </EditText>
 
         <EditText
-            android:id="@+id/Name_login_input"
+            android:id="@+id/mailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#2D2D2D"
             android:hint="Email"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textColorHint="#797878">
-
+            android:textColorHint="#797878"
+            android:inputType="textEmailAddress">
         </EditText>
 
         <EditText
-            android:id="@+id/Password_login_input"
+            android:id="@+id/passInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#2D2D2D"
-            android:hint="Password"
-            android:inputType="textPassword"
+            android:hint="Пароль"
             android:singleLine="true"
-            android:textColor="#2D2D2D"
-            android:textColorHint="#797878">
-
+            android:textColor="@color/black"
+            android:textColorHint="#797878"
+            android:inputType="textPassword">
         </EditText>
 
-        <TextView
+        <EditText
+            android:id="@+id/repeat_pass_Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:text="Забыли пароль?"
-            android:textAlignment="center"
-            android:textColor="#797878"
-            android:textSize="12sp">
-
-        </TextView>
-
+            android:backgroundTint="#2D2D2D"
+            android:hint="Повторите пароль"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#797878"
+            android:inputType="textPassword">
+        </EditText>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/login_button"
+
+            android:id="@+id/registrationGo_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_button"
             android:fontFamily="@font/roboto"
-            android:text="Войти"
+            android:text="Зарегистрироваться"
             android:textAllCaps="false"
             android:textColor="#2D2D2D"
             android:textSize="15dp"
@@ -92,35 +100,21 @@
         </androidx.appcompat.widget.AppCompatButton>
 
         <TextView
-            android:id="@+id/reg_btn"
+            android:id="@+id/back_auth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
-            android:text="Зарегистрироваться"
+            android:text="Авторизироваться"
             android:textAlignment="center"
-            android:textColor="#797878">
+            android:textColor="#797878"
+            >
 
         </TextView>
 
-        <Button
-            android:id="@+id/refresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Refresh"
-            android:visibility="gone">
-
-        </Button>
-
-        <Button
-            android:id="@+id/showTokens"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="showTokens"
-            android:visibility="gone">
-
-        </Button>
 
     </LinearLayout>
+
+
 
 
 </RelativeLayout>

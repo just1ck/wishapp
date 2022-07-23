@@ -3,6 +3,7 @@ package com.rc.wishapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -73,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
     public SharedPreferences sPref;
     final String SAVED_TEXT = "saved_login";
     final String SAVED_PASS = "saved_pass";
-    EditText Login_input;
-    EditText Pass_input;
+    public static EditText Login_input;
+    public static EditText Pass_input;
     final String acT = "access_token";
     final String rfT = "refresh_token";
     public String retutnTokenAccess;
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         Button refreshBtn = findViewById(R.id.refresh);
         Button showTokens = findViewById(R.id.showTokens);
         TextView logoClick = findViewById(R.id.logoClick);
+        TextView regBtn = findViewById(R.id.reg_btn);
 
 
         myApp.loadText(MainActivity.this, Login_input, Pass_input, SAVED_TEXT, SAVED_PASS);
@@ -103,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         LinearLayout layout = findViewById(R.id.layout_Inputs);
-
 
 
         Login_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -151,6 +153,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        regBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Registration_activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slidein, R.anim.slideout);
+                finish();
+            }
+        });
+
 
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 showToast(myApp.getAccess(MainActivity.this, rfT, acT));
             }
         });
+
 
 
         logInButton.setOnClickListener(new View.OnClickListener() {
@@ -208,13 +221,19 @@ public class MainActivity extends AppCompatActivity {
                     Login_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
                     Pass_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
                     showToast("Логин или пароль не верные");
-
-                }
+                }//else if (errs ){
+//                    showToast("Ваш Email не подтвержеден!");
+//                }
 
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
 
 
     public void postAuth(String Login_input, String Pass_input) {
@@ -270,7 +289,9 @@ public class MainActivity extends AppCompatActivity {
 //                    errMessage = errs;
                     System.out.println(jsonErrString);
                     if (errs == 1001){
-                        showToast("Логин или пароль введены не верны!");
+                        showToast("Логин или пароль не верны!");
+                    } else if (errs == 1002){
+                        showToast("Ваша электронная почта не подтверждена!");
                     }
                 } catch (UnsupportedEncodingException | JSONException e) {
                     e.printStackTrace();
@@ -330,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
         TextView text = layout.findViewById(R.id.errTextView);
         text.setText(uText);
         Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.setGravity(Gravity.TOP, 0, 30);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
@@ -362,6 +383,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         myApp.saveText(MainActivity.this, SAVED_TEXT, SAVED_PASS, Login_input, Pass_input);
     }
+
 }
 
 

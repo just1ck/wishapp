@@ -49,8 +49,51 @@ public class myApp {
     }
 
     public static String getAccess(Context context, String rfT, String acT){
-        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);;
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);
         String acessTokenPref = sPref.getString(acT, "");
         return acessTokenPref;
     }
+
+    public static void saveRegText(Context context, EditText nameInput, EditText mailInput, EditText passInput, EditText repeatPassInput, String loginText, String mailText, String passText, String repeatPassText){
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(loginText, nameInput.getText().toString());
+        ed.putString(mailText, mailInput.getText().toString());
+        ed.putString(passText, passInput.getText().toString());
+        ed.putString(repeatPassText, repeatPassInput.getText().toString());
+        ed.commit();
+    }
+
+    public static void loadRegText(Context context, EditText nameInput, EditText mailInput, EditText passInput, EditText repeatPassInput, String loginText, String mailText, String passText, String repeatPassText){
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String savedLogin = sPref.getString(loginText, "");
+        String savedMail = sPref.getString(mailText, "");
+        String savedPass = sPref.getString(passText, "");
+        String savedRepeatPass = sPref.getString(repeatPassText, "");
+        nameInput.setText(savedLogin);
+        mailInput.setText(savedMail);
+        passInput.setText(savedPass);
+        repeatPassInput.setText(savedRepeatPass);
+
+    }
+
+    public static String getEmail(Context context, String mailText){
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String email = sPref.getString(mailText, "");
+        return email;
+    }
+
+    public static String getPassword(Context context, String passText){
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String pass = sPref.getString(passText, "");
+        return pass;
+    }
+
+    public static String getName(Context context, String loginText){
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String name = sPref.getString(loginText, "");
+        return name;
+    }
+
+
 }
