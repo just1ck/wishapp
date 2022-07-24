@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MailCodeVerify"
+    android:background="@drawable/bg_mani">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/logoClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_thin"
+            android:text="Wish App"
+            android:textAlignment="center"
+            android:textColor="#2D2D2D"
+            android:textSize="50sp">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="35dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
+        <TextView
+            android:id="@+id/clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/roboto"
+            android:text="Очистить"
+            android:textAlignment="center"
+            android:textColor="#797878"
+            android:textSize="17sp">
+
+        </TextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/btn_num1"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/inputs_bg"
+                android:cursorVisible="false"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#797878"
+                android:textSize="30sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/btn_num2"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/inputs_bg"
+                android:cursorVisible="false"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#797878"
+                android:textSize="30sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/btn_num3"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/inputs_bg"
+                android:cursorVisible="false"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#797878"
+                android:textSize="30sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/btn_num4"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/inputs_bg"
+                android:cursorVisible="false"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#797878"
+                android:textSize="30sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/btn_num5"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/inputs_bg"
+                android:cursorVisible="false"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#797878"
+                android:textSize="30sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/btn_num6"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/inputs_bg"
+                android:cursorVisible="false"
+                android:maxLength="1"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="#797878"
+                android:textSize="30sp">
+
+            </EditText>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/roboto"
+            android:text="Отправить код еще раз"
+            android:textAlignment="center"
+            android:textColor="#797878"
+            android:textSize="17sp">
+
+        </TextView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/send_mail_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/roboto"
+            android:text="Отправить"
+            android:textAllCaps="false"
+            android:textColor="#2D2D2D"
+            android:textSize="15dp"
+            android:layout_marginVertical="10dp">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+    </LinearLayout>
+
+</RelativeLayout>

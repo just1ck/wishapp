@@ -18,6 +18,9 @@
         android:theme="@style/Theme.WishApp"
         tools:targetApi="31">
         <activity
+            android:name=".MailCodeVerify"
+            android:exported="false" />
+        <activity
             android:name=".Registration_activity"
             android:exported="false"
             android:label="@string/title_activity_registration"

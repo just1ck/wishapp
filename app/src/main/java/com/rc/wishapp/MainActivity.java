@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 view.startAnimation(alpha);
+                HiddenKeyboard.hideKeyboard(MainActivity.this);
                 System.out.println(isEmailValid(Login_input.getText().toString()));
                 if (Login_input.getText().toString().isEmpty() && Pass_input.getText().toString().isEmpty()) {
                         Login_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
@@ -258,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,  URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                showToast("Вы авторизировались!");
+//                showToast("Вы авторизировались!");
                 tokens = response.toString();
 
 
@@ -266,13 +267,13 @@ public class MainActivity extends AppCompatActivity {
                     jsonObj = new JSONObject(tokens);
                     String ACtok = jsonObj.getString("access_token");
                     String RFtok = jsonObj.getString("refresh_token");
-//                    accessToken = ACtok;
-//                    refreshToken = RFtok;
-//                    access_token = ACtok;
-//                    refresh_token = RFtok;
-//                    tokensClass.setTokens(access_token, refresh_token);
-//                    rfTokens.setRefresh_token(refresh_token);
                     myApp.setTokens(ACtok, RFtok, getApplicationContext(), rfT, acT);
+                    VerifyMail.DecodeJWT(myApp.getAccess(MainActivity.this, rfT, acT));
+                    if (VerifyMail.boolMailVerify() == true){
+                        showToast("Вы вторизированы!");
+                    } else if (VerifyMail.boolMailVerify() == false){
+                        showToast("Ваша электронная почта не подтверждена!");
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -294,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(jsonErrString);
                     if (errs == 1001){
                         showToast("Логин или пароль не верны!");
-                    } else if (errs == 1002){
+                    } else if (VerifyMail.boolMailVerify() == false){
                         showToast("Ваша электронная почта не подтверждена!");
                     }
                 } catch (UnsupportedEncodingException | JSONException e) {
@@ -387,6 +388,8 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         myApp.saveText(MainActivity.this, SAVED_TEXT, SAVED_PASS, Login_input, Pass_input);
     }
+
+
 
 }
 

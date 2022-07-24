@@ -20,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,6 +104,7 @@ public class Registration_activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 view.startAnimation(alpha);
+                HiddenKeyboard.hideKeyboard(Registration_activity.this);
                 myApp.saveRegText(Registration_activity.this, nameInput, mailInput, passInput, repeatPass, loginText, mailText, passText, repeatPassText);
                 validateText();
                 if (nameInput.getText().toString().isEmpty() || mailInput.getText().toString().isEmpty() || passInput.getText().toString().isEmpty() || repeatPass.getText().toString().isEmpty()){
@@ -244,10 +246,9 @@ public class Registration_activity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 allObjects = response.toString();
-                showToast("Вы зарегестрировались!");
-                Intent intent = new Intent(Registration_activity.this, MainActivity.class);
+                Intent intent = new Intent(Registration_activity.this, MailCodeVerify.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slideoutrev, R.anim.slidinrev);
+                overridePendingTransition(R.anim.slideout, R.anim.slidein);
                 finish();
 
             }
