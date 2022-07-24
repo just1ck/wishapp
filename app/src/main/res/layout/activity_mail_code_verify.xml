@@ -160,19 +160,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/timer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/roboto"
-            android:text="Отправить код еще раз"
-            android:textAlignment="center"
-            android:textColor="#797878"
-            android:textSize="17sp">
-
-        </TextView>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/send_mail_button"
             android:layout_width="match_parent"

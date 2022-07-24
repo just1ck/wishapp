@@ -271,6 +271,10 @@ public class MainActivity extends AppCompatActivity {
                     VerifyMail.DecodeJWT(myApp.getAccess(MainActivity.this, rfT, acT));
                     if (VerifyMail.boolMailVerify() == true){
                         showToast("Вы вторизированы!");
+                        Intent intent = new Intent(MainActivity.this, wishList.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slidein, R.anim.slideout);
+                        finish();
                     } else if (VerifyMail.boolMailVerify() == false){
                         showToast("Ваша электронная почта не подтверждена!");
                     }

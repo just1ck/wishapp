@@ -8,6 +8,7 @@ import org.json.JSONObject;
 public class VerifyMail {
     public static JSONObject jsonObj;
     public static boolean verify;
+    public static boolean emailVerify;
     public static void DecodeJWT(String token) throws JSONException {
         String jwtToken = token;
         System.out.println("------------ Decode JWT ------------");

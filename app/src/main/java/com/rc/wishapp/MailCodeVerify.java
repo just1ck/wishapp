@@ -40,7 +40,6 @@ public class MailCodeVerify extends AppCompatActivity {
     public Button mailVerify;
     public TextView clearItems;
     public CountDownTimer cTD;
-    public TextView timer;
     public Drawable disableBtnDravable;
     public Drawable btnNormal;
 
@@ -64,12 +63,10 @@ public class MailCodeVerify extends AppCompatActivity {
 
         mailVerify = findViewById(R.id.send_mail_button);
         clearItems = findViewById(R.id.clear);
-        timer = findViewById(R.id.timer);
         final Animation alpha = AnimationUtils.loadAnimation(this, R.anim.button_anim);
 
         editTextArr = new EditText[]{btn_num1, btn_num2, btn_num3, btn_num4, btn_num5, btn_num6};
-
-        timer.setVisibility(View.GONE);
+        
 
         btnClick(btn_num1, btn_num2);
         btnClick(btn_num2, btn_num3);
@@ -204,7 +201,6 @@ public class MailCodeVerify extends AppCompatActivity {
             @Override
             public void onTick(long l) {
                 clearItems.setEnabled(false);
-                timer.setVisibility(View.GONE);
                 mailVerify.setText(l / 1000 + " c");
                 mailVerify.setTextColor(Color.WHITE);
                 mailVerify.setEnabled(false);
@@ -214,7 +210,6 @@ public class MailCodeVerify extends AppCompatActivity {
             @Override
             public void onFinish() {
                 clearItems.setEnabled(true);
-                timer.setVisibility(View.GONE);
                 mailVerify.setTextColor(Color.WHITE);
                 mailVerify.setText("Отправить");
                 mailVerify.setEnabled(true);

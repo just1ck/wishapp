@@ -13,10 +13,16 @@
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/error_input.xml" value="0.3625" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/inputs_bg.xml" value="0.333" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/inputs_focus_bg.xml" value="0.3625" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/spin_rotate.xml" value="0.2095" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/spinner_ring.xml" value="0.2095" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/font/roboto.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/font/roboto_thin.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_mail_code_verify.xml" value="0.33" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_registration.xml" value="0.2947916666666667" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_wish_list.xml" value="0.29375" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/empty_name.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/splash_screen.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1425" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/xml/network_security_config.xml" value="0.1" />
       </map>
