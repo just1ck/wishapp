@@ -94,7 +94,7 @@ public class Registration_activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Registration_activity.this, MainActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slideoutrev, R.anim.slidinrev);
+                overridePendingTransition(R.anim.slidinrev, R.anim.slideoutrev);
                 finish();
 
             }

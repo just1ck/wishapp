@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".proffile"
+    android:background="@drawable/bg_mani">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            >
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/logout_Button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:src="@drawable/logout"
+            android:layout_weight="4"
+            >
+
+        </ImageView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:background="@drawable/tapbar"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        >
+        <ImageView
+            android:id="@+id/profiilePage"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:src="@drawable/proffile"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="5"
+            >
+        </ImageView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:src="@drawable/search_ic"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="5">
+
+
+        </ImageView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:src="@drawable/friends"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="5">
+
+
+        </ImageView>
+
+    </LinearLayout>
+
+</RelativeLayout>

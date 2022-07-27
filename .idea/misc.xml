@@ -6,8 +6,11 @@
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/bg_button.xml" value="0.3625" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/bg_button_click.xml" value="0.1425" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/bg_button_disable.xml" value="0.156" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/bg_description.xml" value="0.302" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/bg_full_button.xml" value="0.1425" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/bg_mani.xml" value="0.22" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/button_plus.xml" value="0.3635" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/dialog_bg.xml" value="0.3625" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/err_inputs.xml" value="0.3635" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/error_bg.xml" value="0.2975" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/error_input.xml" value="0.3625" />
@@ -15,12 +18,15 @@
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/inputs_focus_bg.xml" value="0.3625" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/spin_rotate.xml" value="0.2095" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/spinner_ring.xml" value="0.2095" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/drawable/tapbar.xml" value="0.295" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/font/roboto.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/font/roboto_thin.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_mail_code_verify.xml" value="0.33" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_proffile.xml" value="0.2911458333333333" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_registration.xml" value="0.2947916666666667" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/activity_wish_list.xml" value="0.29375" />
+        <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/create_dialog.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/empty_name.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/layout/splash_screen.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/nikit/AndroidStudioProjects/WishApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1425" />

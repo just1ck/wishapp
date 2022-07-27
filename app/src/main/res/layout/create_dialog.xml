@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:layout_marginHorizontal="40dp"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/take_photo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/button_plus">
+
+        </ImageView>
+
+        <EditText
+            android:id="@+id/wishName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2D2D2D"
+            android:hint="Название подарка"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#797878">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/linkWish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2D2D2D"
+            android:hint="Ссылка"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#797878">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/Description"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:backgroundTint="#2D2D2D"
+            android:hint="Описание"
+
+            android:background="@drawable/bg_description"
+            android:maxLines="10"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="#797878"
+            android:textAllCaps="false"
+            android:gravity="top|start"
+            android:paddingTop="10dp"
+            android:scrollbars="vertical"
+            >
+
+        </EditText>
+
+        <androidx.appcompat.widget.AppCompatButton
+
+            android:id="@+id/createButtonDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/roboto"
+            android:text="Добавить"
+            android:textAllCaps="false"
+            android:textColor="#2D2D2D"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp">
+
+        </androidx.appcompat.widget.AppCompatButton>
+    </LinearLayout>
+
+</RelativeLayout>
