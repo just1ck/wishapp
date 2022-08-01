@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    Login_input.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    Login_input.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
                 }
             }
         });
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    Pass_input.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    Pass_input.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
 
                 }
             }
@@ -197,23 +197,23 @@ public class MainActivity extends AppCompatActivity {
                 HiddenKeyboard.hideKeyboard(MainActivity.this);
                 System.out.println(isEmailValid(Login_input.getText().toString()));
                 if (Login_input.getText().toString().isEmpty() && Pass_input.getText().toString().isEmpty()) {
-                        Login_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-                        Pass_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                        Login_input.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
+                        Pass_input.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                         showToast("Заполните поля");
                 }
                 else if (isEmailValid(Login_input.getText().toString()) == false){
                     showToast("Email введен не верно");
                 }
                 else if (Pass_input.getText().toString().isEmpty()){
-                    Pass_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    Pass_input.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                     showToast("Введите пароль");
                 }
                 else if (Pass_input.getText().length() < 6){
-                    Pass_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    Pass_input.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                     showToast("Пароль должен быть больше 6 символов");
                 }
                 else if (Login_input.getText().toString().isEmpty()){
-                    Login_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    Login_input.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                     showToast("Введите mail");
                 }
                 else if (Login_input.getText().toString().isEmpty() == false && Pass_input.getText().toString().isEmpty() == false){
@@ -223,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
 //                    postAuthV2(Login_input.getText().toString(), Pass_input.getText().toString());
 
                 } else if(errMessage.equals("1001")){
-                    Login_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-                    Pass_input.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    Login_input.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
+                    Pass_input.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                     showToast("Логин или пароль не верные");
                 }//else if (errs ){
 //                    showToast("Ваш Email не подтвержеден!");

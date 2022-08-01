@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/bg_mani">
+    android:background="@drawable/shapes">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +22,9 @@
             android:fontFamily="@font/roboto_thin"
             android:text="Wish App"
             android:textAlignment="center"
-            android:textColor="#2D2D2D"
+            android:shadowColor="@color/white"
+            android:shadowRadius="20"
+            android:textColor="#B3FFFFFF"
             android:textSize="50sp">
 
         </TextView>
@@ -36,6 +39,7 @@
         android:layout_centerVertical="true"
         android:layout_marginHorizontal="35dp"
         android:background="@drawable/inputs_bg"
+        android:elevation="40dp"
         android:orientation="vertical"
         android:paddingHorizontal="40dp">
 
@@ -44,11 +48,11 @@
             android:id="@+id/Name_login_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2D2D2D"
             android:hint="Email"
+            android:backgroundTint="#66FFFFFF"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="#797878">
+            android:textColor="#99FFFFFF"
+            android:textColorHint="#33FFFFFF">
 
         </EditText>
 
@@ -56,12 +60,12 @@
             android:id="@+id/Password_login_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2D2D2D"
+            android:backgroundTint="#66FFFFFF"
             android:hint="Password"
             android:inputType="textPassword"
             android:singleLine="true"
-            android:textColor="#2D2D2D"
-            android:textColorHint="#797878">
+            android:textColor="#99FFFFFF"
+            android:textColorHint="#33FFFFFF">
 
         </EditText>
 
@@ -71,7 +75,7 @@
             android:layout_marginVertical="5dp"
             android:text="Забыли пароль?"
             android:textAlignment="center"
-            android:textColor="#797878"
+            android:textColor="#66FFFFFF"
             android:textSize="12sp">
 
         </TextView>
@@ -84,10 +88,9 @@
             android:background="@drawable/bg_button"
             android:fontFamily="@font/roboto"
             android:text="Войти"
-            android:textAllCaps="false"
-            android:textColor="#2D2D2D"
-            android:textSize="15dp"
-            >
+            android:textAllCaps="true"
+            android:textColor="#99FFFFFF"
+            android:textSize="15dp">
 
         </androidx.appcompat.widget.AppCompatButton>
 
@@ -96,16 +99,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:text="Зарегистрироваться"
                 android:textAlignment="center"
-                android:textColor="#797878">
+                android:textColor="#66FFFFFF">
 
             </TextView>
-
 
 
         </LinearLayout>

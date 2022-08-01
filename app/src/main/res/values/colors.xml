@@ -10,4 +10,5 @@
     <color name="Red">#FF0000FF</color>
     <color name="WhiteAlpha">#44FFFFFF</color>
     <color name="WhiteAlphaBottom">#A3FFFFFF</color>
+    <color name="Bg_tint">#66FFFFFF</color>
 </resources>
