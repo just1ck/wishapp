@@ -111,14 +111,14 @@ public class Registration_activity extends AppCompatActivity {
                     showToast("Все поля обязательны для заполнения");
                 } else if (passInput.getText().length() < 6){
                     showToast("Пароль должен быть не меньше 6 символов");
-                    passInput.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    passInput.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                 } else if(isEmailValid(mailInput.getText().toString()) == false){
                     showToast("веден неверный mail");
-                    mailInput.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    mailInput.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                 } else if (passInput.getText().toString().equals(repeatPass.getText().toString()) == false){
                     showToast("Пароли не совпадают");
-                    passInput.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-                    repeatPass.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    passInput.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
+                    repeatPass.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                 }  else if (nameInput.getText().toString().isEmpty() == false|| mailInput.getText().toString().isEmpty() == false|| passInput.getText().toString().isEmpty() == false || repeatPass.getText().toString().isEmpty() == false){
 
                     registration(Registration_activity.this);
@@ -133,7 +133,7 @@ public class Registration_activity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    mailInput.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    mailInput.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
 
                 }
             }
@@ -143,7 +143,7 @@ public class Registration_activity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    nameInput.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    nameInput.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
 
                 }
             }
@@ -153,7 +153,7 @@ public class Registration_activity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    repeatPass.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    repeatPass.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
 
                 }
             }
@@ -163,7 +163,7 @@ public class Registration_activity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    passInput.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    passInput.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
 
                 }
             }
@@ -221,7 +221,7 @@ public class Registration_activity extends AppCompatActivity {
     public void validateText(){
         for (int i = 0; i < edtxtArr.length; i++){
             if (edtxtArr[i].getText().toString().isEmpty()){
-                edtxtArr[i].getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                edtxtArr[i].getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
             }
         }
     }

@@ -81,9 +81,6 @@ public class wishList extends AppCompatActivity {
             }
         });
 
-
-
-
         //logout_btn = findViewById(R.id.logout_button);
 
 
@@ -105,12 +102,12 @@ public class wishList extends AppCompatActivity {
         createButtonDialog = dialogView.findViewById(R.id.createButtonDialog);
 
         wishName = dialogView.findViewById(R.id.wishName);
-        wishName.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        wishName.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
 
         wishName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wishName.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                wishName.getBackground().setColorFilter(Color.parseColor("#66FFFFFF"), PorterDuff.Mode.SRC_ATOP);
             }
         });
 
@@ -119,10 +116,10 @@ public class wishList extends AppCompatActivity {
             public void onClick(View view) {
                 view.startAnimation(alpha);
                 if (wishName.getText().toString().isEmpty() && takedPhoto == false){
-                    wishName.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    wishName.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                     showToast("Заполните обязательные поля");
                 }else if (wishName.getText().toString().isEmpty()){
-                    wishName.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    wishName.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
                     showToast("Введите название");
                 } else if (takedPhoto == false){
                     showToast("Прикрепите фотографию");
