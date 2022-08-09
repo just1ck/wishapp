@@ -172,10 +172,26 @@
             android:textAllCaps="true"
             android:textColor="#99FFFFFF"
             android:textSize="15dp"
-            android:layout_marginVertical="10dp">
+            android:layout_marginTop="10dp">
 
         </androidx.appcompat.widget.AppCompatButton>
 
+        <TextView
+            android:id="@+id/resend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/roboto"
+            android:text="Отправить код еще раз"
+            android:textAlignment="center"
+            android:textColor="#797878"
+            android:textSize="17sp">
+
+        </TextView>
+
+
     </LinearLayout>
+
+
 
 </RelativeLayout>

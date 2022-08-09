@@ -65,6 +65,10 @@ public class Registration_activity extends AppCompatActivity {
     public static JSONObject errObject = null;
     public static String errorCode;
     public static int countErr;
+    public String tokens;
+    final String acT = "access_token";
+    final String rfT = "refresh_token";
+
 
 
 
@@ -122,6 +126,8 @@ public class Registration_activity extends AppCompatActivity {
                 }  else if (nameInput.getText().toString().isEmpty() == false|| mailInput.getText().toString().isEmpty() == false|| passInput.getText().toString().isEmpty() == false || repeatPass.getText().toString().isEmpty() == false){
 
                     registration(Registration_activity.this);
+
+
 
 
                 }
@@ -246,6 +252,7 @@ public class Registration_activity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 allObjects = response.toString();
+                postAuth(myApp.getEmail(Registration_activity.this, mailTextR), myApp.getPassword(Registration_activity.this, passTextR));
                 Intent intent = new Intent(Registration_activity.this, MailCodeVerify.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slideout, R.anim.slidein);
@@ -318,6 +325,90 @@ public class Registration_activity extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
     }
+
+    public void postAuth(String Login_input, String Pass_input) {
+        RequestQueue requestQueue = Volley.newRequestQueue(Registration_activity.this);
+        String URL = "https://api.wishapp.ru/auth/signin";
+        JSONObject jsonBody = new JSONObject();
+
+        try {
+            jsonBody.put("email", myApp.getEmail(Registration_activity.this, mailTextR));
+            jsonBody.put("password", myApp.getPassword(Registration_activity.this, passTextR));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final String requestBody = jsonBody.toString();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                tokens = response.toString();
+
+                try {
+                    jsonObj = new JSONObject(tokens);
+                    String ACtok = jsonObj.getString("access_token");
+                    String RFtok = jsonObj.getString("refresh_token");
+                    myApp.setTokens(ACtok, RFtok, getApplicationContext(), rfT, acT);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("x-api-version", "1.0");
+                return params;
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                String responseString = "";
+                if (response != null) {
+                    try {
+                        String jsonString = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers));
+                        responseString = String.valueOf(jsonString);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    // can get more details such as response.headers
+                }
+                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
 
 
 

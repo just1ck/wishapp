@@ -26,6 +26,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MailCodeVerify extends AppCompatActivity {
     public EditText btn_num1;
     public EditText btn_num2;
@@ -42,6 +60,16 @@ public class MailCodeVerify extends AppCompatActivity {
     public CountDownTimer cTD;
     public Drawable disableBtnDravable;
     public Drawable btnNormal;
+    public String tokens;
+    public JSONObject jsonObj;
+    final String acT = "access_token";
+    final String rfT = "refresh_token";
+    public static String mailTextR = "email";
+    public static String passTextR = "password";
+    public static String errorCode;
+    public static JSONObject errObject = null;
+    public String access;
+    public TextView resend;
 
 
     @Override
@@ -50,6 +78,8 @@ public class MailCodeVerify extends AppCompatActivity {
         setContentView(R.layout.activity_mail_code_verify);
 
         showToast("Введите код из сообщения на почте");
+
+        access = myApp.getAccess(MailCodeVerify.this, rfT, acT);
 
 
 
@@ -60,6 +90,7 @@ public class MailCodeVerify extends AppCompatActivity {
         btn_num4 = findViewById(R.id.btn_num4);
         btn_num5 = findViewById(R.id.btn_num5);
         btn_num6 = findViewById(R.id.btn_num6);
+        resend = findViewById(R.id.resend);
 
         mailVerify = findViewById(R.id.send_mail_button);
         clearItems = findViewById(R.id.clear);
@@ -90,6 +121,15 @@ public class MailCodeVerify extends AppCompatActivity {
             }
         });
 
+        resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.startAnimation(alpha);
+                cDT();
+                sendMessage();
+            }
+        });
+
 
         mailVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +140,9 @@ public class MailCodeVerify extends AppCompatActivity {
                     validateCode();
                     showToast("Введите код");
                 }else {
-                    showToast(getMailCode());
-                    cDT();
+                    postVerify(getMailCode());
+
+
                 }
 
             }
@@ -200,23 +241,187 @@ public class MailCodeVerify extends AppCompatActivity {
         cTD = new CountDownTimer(20000, 1000) {
             @Override
             public void onTick(long l) {
-                clearItems.setEnabled(false);
-                mailVerify.setText(l / 1000 + " c");
-                mailVerify.setTextColor(Color.WHITE);
-                mailVerify.setEnabled(false);
-                mailVerify.setBackground(disableBtnDravable);
+                resend.setText(l / 1000 + " c");
+                resend.setEnabled(false);
             }
 
             @Override
             public void onFinish() {
-                clearItems.setEnabled(true);
-                mailVerify.setTextColor(Color.WHITE);
-                mailVerify.setText("Отправить");
-                mailVerify.setEnabled(true);
-                mailVerify.setBackground(btnNormal);
+                resend.setEnabled(false);
+                resend.setText("Отправить код еще раз");
             }
         }
         .start();
 
     }
+
+    public void postVerify(String verifyCode) {
+        RequestQueue requestQueue = Volley.newRequestQueue(MailCodeVerify.this);
+        String URL = "https://api.wishapp.ru/auth/email/verify";
+        JSONObject jsonBody = new JSONObject();
+
+        try {
+            jsonBody.put("code", verifyCode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final String requestBody = jsonBody.toString();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Intent intent = new Intent(MailCodeVerify.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slidinrev, R.anim.slideoutrev);
+                finish();
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String jsonErrString = null;
+                try {
+                    jsonErrString = new String(error.networkResponse.data,
+                            HttpHeaderParser.parseCharset(error.networkResponse.headers));
+                    errorCode = jsonErrString;
+                    errObject = new JSONObject(errorCode);
+                    int errs = errObject.getInt("code");
+                    if (errs == 1002){
+                        showToast("Неправильный код");
+                    }else if (errs == 1004){
+                        showToast("Email уже подтвержден");
+                    }else {
+                        showToast("правильный код");
+                    }
+                    System.out.println(jsonErrString);
+
+                } catch (UnsupportedEncodingException | JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("x-api-version", "1.0");
+                params.put("Authorization", "Bearer " + myApp.getAccess(MailCodeVerify.this, rfT, acT));
+                return params;
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                String responseString = "";
+                if (response != null) {
+                    try {
+                        String jsonString = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers));
+                        responseString = String.valueOf(jsonString);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    // can get more details such as response.headers
+                }
+                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
+    public void sendMessage() {
+        RequestQueue requestQueue = Volley.newRequestQueue(MailCodeVerify.this);
+        String URL = "https://api.wishapp.ru/auth/email/resend";
+        JSONObject jsonBody = new JSONObject();
+
+
+        final String requestBody = jsonBody.toString();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("x-api-version", "1.0");
+                params.put("Authorization", "Bearer " + myApp.getAccess(MailCodeVerify.this, rfT, acT));
+                return params;
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                String responseString = "";
+                if (response != null) {
+                    try {
+                        String jsonString = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers));
+                        responseString = String.valueOf(jsonString);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    // can get more details such as response.headers
+                }
+                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
+
+
+
 }
