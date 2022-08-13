@@ -27,6 +27,8 @@ public class Profile_activity extends AppCompatActivity {
 
         logoutButton = findViewById(R.id.logout_Button);
 
+        
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
