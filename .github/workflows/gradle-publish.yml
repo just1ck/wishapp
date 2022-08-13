@@ -35,6 +35,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: app-release.apk
+          name: app-debug.apk
           path: C:\Users\nikit\AndroidStudioProjects\WishApp\app\build\outputs\apk\debug\app-debug.apk
           arguments: build
