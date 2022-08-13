@@ -1,4 +1,4 @@
-package com.rc.wishapp;
+package com.rc.wishapp.memory_methods;
 
 import android.content.Context;
 import android.content.SharedPreferences;

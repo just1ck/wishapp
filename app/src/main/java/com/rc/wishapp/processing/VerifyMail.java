@@ -1,4 +1,4 @@
-package com.rc.wishapp;
+package com.rc.wishapp.processing;
 
 
 import org.apache.commons.codec.binary.Base64;

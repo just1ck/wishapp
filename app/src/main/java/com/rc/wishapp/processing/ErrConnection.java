@@ -1,4 +1,4 @@
-package com.rc.wishapp;
+package com.rc.wishapp.processing;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

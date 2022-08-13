@@ -1,4 +1,4 @@
-package com.rc.wishapp;
+package com.rc.wishapp.processing;
 
 public class Tokens {
     private String access_token;

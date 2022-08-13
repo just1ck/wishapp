@@ -1,4 +1,4 @@
-package com.rc.wishapp;
+package com.rc.wishapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,14 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 
-public class proffile extends AppCompatActivity {
+import com.rc.wishapp.R;
+import com.rc.wishapp.memory_methods.myApp;
+import com.rc.wishapp.requests.Requests;
+
+public class Profile_activity extends AppCompatActivity {
 
     public ImageView logoutButton;
-    public Logout logout;
-    public RefreshTokens refreshTokens;
     final String acT = "access_token";
     final String rfT = "refresh_token";
 
@@ -26,31 +27,28 @@ public class proffile extends AppCompatActivity {
 
         logoutButton = findViewById(R.id.logout_Button);
 
-        logout = new Logout();
-        refreshTokens = new RefreshTokens();
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 view.startAnimation(alpha);
-                System.out.println(myApp.getAccess(proffile.this, rfT, acT));
-                logout.logout(proffile.this);
-                myApp.setTokens(null, null, proffile.this, rfT, acT);
-                Intent mainIntent = new Intent(proffile.this, MainActivity.class);
-                proffile.this.startActivity(mainIntent);
-                proffile.this.finish();
+                System.out.println(myApp.getAccess(Profile_activity.this, rfT, acT));
+                Requests.logout(Profile_activity.this);
+                myApp.setTokens(null, null, Profile_activity.this, rfT, acT);
+                Intent mainIntent = new Intent(Profile_activity.this, MainActivity.class);
+                Profile_activity.this.startActivity(mainIntent);
+                Profile_activity.this.finish();
                 overridePendingTransition(R.anim.slidinrev, R.anim.slideoutrev);
 
             }
         });
-
 
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(proffile.this, wishList.class);
+        Intent intent = new Intent(Profile_activity.this, WishList_activity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slidein, R.anim.slideout);
         finish();

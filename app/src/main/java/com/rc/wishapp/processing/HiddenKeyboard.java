@@ -1,4 +1,4 @@
-package com.rc.wishapp;
+package com.rc.wishapp.processing;
 
 import android.app.Activity;
 import android.view.View;

@@ -1,19 +1,15 @@
-package com.rc.wishapp;
+package com.rc.wishapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,12 +17,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class wishList extends AppCompatActivity {
+import com.rc.wishapp.R;
+import com.rc.wishapp.processing.ShowToast;
+
+public class WishList_activity extends AppCompatActivity {
     public ImageView proffileBtn;
-    public RefreshTokens refreshTokens;
     final String acT = "access_token";
     final String rfT = "refresh_token";
     public ScrollView wishView;
@@ -49,8 +45,6 @@ public class wishList extends AppCompatActivity {
         takedPhoto = false;
 
 
-        refreshTokens = new RefreshTokens();
-
 
         createBtn = findViewById(R.id.createWish);
         proffileBtn = findViewById(R.id.profiilePage);
@@ -65,7 +59,7 @@ public class wishList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 view.startAnimation(alpha);
-                Intent intent = new Intent(wishList.this, proffile.class);
+                Intent intent = new Intent(WishList_activity.this, Profile_activity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slidinrev, R.anim.slideoutrev);
                 finish();
@@ -92,7 +86,7 @@ public class wishList extends AppCompatActivity {
     }
 
     public void showDialog(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(wishList.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(WishList_activity.this);
         final View dialogView = getLayoutInflater().inflate(R.layout.create_dialog, null);
         builder.setView(dialogView);
         final AlertDialog dialog = builder.create();
@@ -117,12 +111,12 @@ public class wishList extends AppCompatActivity {
                 view.startAnimation(alpha);
                 if (wishName.getText().toString().isEmpty() && takedPhoto == false){
                     wishName.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
-                    showToast("Заполните обязательные поля");
+                    ShowToast.showToast("Заполните обязательные поля", WishList_activity.this);
                 }else if (wishName.getText().toString().isEmpty()){
                     wishName.getBackground().setColorFilter(Color.parseColor("#f405fd"), PorterDuff.Mode.SRC_ATOP);
-                    showToast("Введите название");
+                    ShowToast.showToast("Введите название", WishList_activity.this);
                 } else if (takedPhoto == false){
-                    showToast("Прикрепите фотографию");
+                    ShowToast.showToast("Прикрепите фотографию", WishList_activity.this);
                 } else if (wishName.getText().toString().isEmpty() == false && takedPhoto == true){
                     dialog.dismiss();
                 }
@@ -140,14 +134,9 @@ public class wishList extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
-
             }
         });
-
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -160,17 +149,4 @@ public class wishList extends AppCompatActivity {
         }
     }
 
-    public void showToast(String uText){
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.empty_name, findViewById(R.id.toastLayout));
-
-        TextView text = layout.findViewById(R.id.errTextView);
-        text.setText(uText);
-        text.setTextColor(Color.BLACK);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP, 0, 30);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
-    }
 }

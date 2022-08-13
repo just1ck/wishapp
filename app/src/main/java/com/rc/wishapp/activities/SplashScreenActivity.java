@@ -1,4 +1,4 @@
-package com.rc.wishapp;
+package com.rc.wishapp.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.os.Handler;
 import android.widget.ProgressBar;
 
+import com.rc.wishapp.R;
+import com.rc.wishapp.processing.VerifyMail;
+import com.rc.wishapp.memory_methods.myApp;
+import com.rc.wishapp.requests.Requests;
+
 import org.json.JSONException;
 
 public class SplashScreenActivity extends Activity {
 
     private final int SPLASH_DISPLAY_LENGTH = 2000;
-    public RefreshTokens rfTokens;
     final String acT = "access_token";
     final String rfT = "refresh_token";
     public String access;
@@ -20,9 +24,8 @@ public class SplashScreenActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-         rfTokens = new RefreshTokens();
          if (myApp.getAccess(SplashScreenActivity.this, rfT, acT ) != null && myApp.getRefresh(SplashScreenActivity.this, rfT, acT ) != null){
-             rfTokens.refresh_tokens(SplashScreenActivity.this);
+             Requests.refresh_tokens(SplashScreenActivity.this);
          }
 
 
@@ -47,7 +50,7 @@ public class SplashScreenActivity extends Activity {
                     overridePendingTransition(R.anim.slidein, R.anim.slideout);
                 }else if (myApp.getAccess(SplashScreenActivity.this, rfT, acT ) != null && myApp.getRefresh(SplashScreenActivity.this, rfT, acT ) != null){
                     if (VerifyMail.boolMailVerify()){
-                        Intent mainIntent = new Intent(SplashScreenActivity.this, wishList.class);
+                        Intent mainIntent = new Intent(SplashScreenActivity.this, WishList_activity.class);
                         SplashScreenActivity.this.startActivity(mainIntent);
                         SplashScreenActivity.this.finish();
                         overridePendingTransition(R.anim.slidein, R.anim.slideout);
