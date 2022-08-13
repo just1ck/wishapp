@@ -32,8 +32,8 @@ jobs:
         run: chmod +x ./gradlew
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      - name: Upload APK
+      - name: Upload APK after
         uses: actions/upload-artifact@v2
         with:
           name: app-debug.apk
-          path: C:\Users\nikit\AndroidStudioProjects\WishApp\app\build\outputs\apk\debug\app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
