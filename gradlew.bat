@@ -14,6 +14,8 @@
 @rem limitations under the License.
 @rem
 
+chmod +x gradlew
+
 @if "%DEBUG%" == "" @echo off
 @rem ##########################################################################
 @rem
