@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "release" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "release" ]
 
 permissions:
   contents: read
@@ -32,5 +32,9 @@ jobs:
         run: chmod +x ./gradlew
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
         with:
+          name: app-release.apk
+          path: C:\Users\nikit\AndroidStudioProjects\WishApp\app\build\outputs\apk\debug\app-debug.apk
           arguments: build
