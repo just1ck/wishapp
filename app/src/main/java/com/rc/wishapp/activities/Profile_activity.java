@@ -26,10 +26,7 @@ public class Profile_activity extends AppCompatActivity {
         final Animation alpha = AnimationUtils.loadAnimation(this, R.anim.button_anim);
 
         logoutButton = findViewById(R.id.logout_Button);
-
-
-
-
+        test
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
