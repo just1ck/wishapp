@@ -29,6 +29,8 @@ public class Profile_activity extends AppCompatActivity {
 
 
 
+        
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
