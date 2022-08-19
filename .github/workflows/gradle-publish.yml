@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "release" ]
+    branches: [ "test" ]
   pull_request:
-    branches: [ "release" ]
+    branches: [ "test" ]
 
 permissions:
   contents: read
@@ -43,5 +43,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
-          name: apk
+          name: test_build
           path: app/build/outputs/apk/debug/app-debug.apk
