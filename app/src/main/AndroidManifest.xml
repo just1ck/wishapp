@@ -5,8 +5,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WishApp"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.ResetPassword"
+            android:exported="false" />
         <activity
             android:name=".activities.Profile_activity"
             android:exported="false" />

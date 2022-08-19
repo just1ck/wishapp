@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     final String SAVED_PASS = "saved_pass";
     public static EditText Login_input;
     public static EditText Pass_input;
+    public static TextView reset_pass;
 
 
 
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         Button showTokens = findViewById(R.id.showTokens);
         TextView logoClick = findViewById(R.id.logoClick);
         LinearLayout regBtn = findViewById(R.id.reg_btn);
+        reset_pass = findViewById(R.id.reset_pass);
+
 
         if (ErrConnection.hasConnection(MainActivity.this) == false){
             ShowToast.showToast("Нет соединения", MainActivity.this);
@@ -72,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.layout_Inputs);
 
+        reset_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ResetPassword.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slidein, R.anim.slideout);
+                finish();
+            }
+        });
 
         Login_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

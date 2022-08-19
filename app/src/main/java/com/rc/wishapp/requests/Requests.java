@@ -38,16 +38,17 @@ public class Requests {
     public static JSONObject jsonObj = null;
     final static String acT = "access_token";
     final static String rfT = "refresh_token";
-    public static String access;
-    public static String tokens;
-    public static String errorCode;
-    public static String errMessage;
-    public static JSONObject errObject = null;
-    public static String retutnTokenAccess;
-    public static String retutnTokenRefresh;
-    public static String access_token;
-    public static String refresh_token;
-    public static Context context;
+    private static String access;
+    private static String tokens;
+    private static String errorCode;
+    private static String errMessage;
+    private static JSONObject errObject = null;
+    private static String retutnTokenAccess;
+    private static String retutnTokenRefresh;
+    private static String access_token;
+    private static String refresh_token;
+    private static Context context;
+    private static String BaseUrl = "https://api.wishapp.ru";
 
 
 
@@ -77,7 +78,7 @@ public class Requests {
         System.out.println(tokensClass.access());
         System.out.println(tokensClass.refresh());
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        String URL = "https://api.wishapp.ru/auth/refresh";
+        String URL = BaseUrl + "/auth/refresh";
         JSONObject jsonBody = new JSONObject();
 
 
@@ -163,7 +164,7 @@ public class Requests {
 
     public static void logout(Context context){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        String URL = "https://api.wishapp.ru/auth/logout";
+        String URL = BaseUrl + "/auth/logout";
         JSONObject jsonBody = new JSONObject();
         access = myApp.getAccess(context.getApplicationContext(), rfT, acT);
 
@@ -241,7 +242,7 @@ public class Requests {
 
         final Animation alpha = AnimationUtils.loadAnimation(context, R.anim.button_anim);
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        String URL = "https://api.wishapp.ru/auth/signin";
+        String URL = BaseUrl + "/auth/signin";
         JSONObject jsonBody = new JSONObject();
 
         try {
@@ -355,7 +356,7 @@ public class Requests {
 
     public static void registration(Context context, Activity activityFirst, Class activitySecond, String mailTextR, String passTextR, String loginTextR) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        String URL = "https://api.wishapp.ru/auth/signup";
+        String URL = BaseUrl + "/auth/signup";
         JSONObject jsonBody = new JSONObject();
 
         try {
@@ -450,7 +451,7 @@ public class Requests {
 
     public static void postVerify(String verifyCode, Context context, Activity activityFirst, Class activitySecond) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        String URL = "https://api.wishapp.ru/auth/email/verify";
+        String URL = BaseUrl + "/auth/email/verify";
         JSONObject jsonBody = new JSONObject();
 
         try {
@@ -547,7 +548,7 @@ public class Requests {
 
     public static void sendMessage(Context context) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        String URL = "https://api.wishapp.ru/auth/email/resend";
+        String URL = BaseUrl + "/auth/email/resend";
         JSONObject jsonBody = new JSONObject();
 
 
@@ -612,5 +613,84 @@ public class Requests {
         };
 
         requestQueue.add(stringRequest);
-    }//resend
+    }
+
+    public static void requestChangePassword(Context context, Activity activity, Class second, String mail) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String URL = BaseUrl + "/auth/reset";
+        JSONObject jsonBody = new JSONObject();
+
+        try {
+            jsonBody.put("email", mail);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        final String requestBody = jsonBody.toString();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                ShowToast.showToast("На Email выслано сообщение", activity);
+                Intent intent = new Intent(activity, second);
+                activity.startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.slidinrev, R.anim.slideoutrev);
+                activity.finish();
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("x-api-version", "1.0");
+                return params;
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                String responseString = "";
+                if (response != null) {
+                    try {
+                        String jsonString = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers));
+                        responseString = String.valueOf(jsonString);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    // can get more details such as response.headers
+                }
+                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
 }
