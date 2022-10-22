@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -285,6 +286,7 @@ public class Requests {
 
             }
 
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -358,7 +360,6 @@ public class Requests {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String URL = BaseUrl + "/auth/signup";
         JSONObject jsonBody = new JSONObject();
-
         try {
             jsonBody.put("email", myApp.getEmail(context.getApplicationContext(), mailTextR));
             jsonBody.put("password", myApp.getPassword(context.getApplicationContext(), passTextR));
@@ -370,18 +371,17 @@ public class Requests {
         final String requestBody = jsonBody.toString();
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>()  {
             @Override
             public void onResponse(String response) {
+                System.out.println("test");
                 allObjects = response.toString();
                 postAuth(myApp.getEmail(context, mailTextR), myApp.getPassword(context, passTextR), context, activityFirst, activitySecond);
                 Intent intent = new Intent(activityFirst, activitySecond);
                 context.startActivity(intent);
                 ((Activity) context).overridePendingTransition(R.anim.slideout, R.anim.slidein);
                 activityFirst.finish();
-
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -394,21 +394,17 @@ public class Requests {
                     int errs = errObject.getInt("code");
                     if (errs == 1003){
                         ShowToast.showToast("Данный Email уже зарегистрирован", activityFirst);
-
                     }
                     System.out.println(jsonErrString);
-
                 } catch (UnsupportedEncodingException | JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }) {
             @Override
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
             }
-
 
             @Override
             public byte[] getBody() throws AuthFailureError {
@@ -420,12 +416,14 @@ public class Requests {
                 }
             }
 
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("x-api-version", "1.0");
                 return params;
             }
+
 
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
@@ -442,9 +440,15 @@ public class Requests {
 
                     // can get more details such as response.headers
                 }
+
+
                 return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+
             }
+
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 4, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
 
         requestQueue.add(stringRequest);
     }//Registration
